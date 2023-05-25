@@ -4,6 +4,7 @@ import io.apiable.gateways.adapter.models.domain.Api
 import io.apiable.gateways.adapter.models.domain.Plan
 import io.apiable.gateways.adapter.models.conf.Conf
 import io.apiable.gateways.adapter.models.domain.Client
+import io.apiable.gateways.adapter.models.domain.Subscription
 
 /**
  * Apiable Oy
@@ -35,8 +36,8 @@ interface GatewayAdopter {
     fun deletePlan(conf: Conf, plan: Plan)
     fun ping(conf: Conf): Boolean
     fun getDocumentation(conf: Conf, id:String, version:String) : String
-    fun createKey(conf: Conf, clientIdOverride: String? = null, clientSecretOverride: String? = null, appendToToken: Map<String,String>? = null): String
-    fun readKey(conf: Conf, subscriptionId: String): String
+    fun createKey(conf: Conf, subscription: Subscription, clientIdOverride: String? = null, clientSecretOverride: String? = null, appendToToken: Map<String,String>? = null): String
+    fun readKey(conf: Conf, subscription: Subscription): String
     fun revokeKey(conf: Conf, key: String, clientIdOverride: String? = null, clientSecretOverride: String? = null)
     fun refreshKey(conf: Conf, key: String, clientIdOverride: String? = null, clientSecretOverride: String? = null, appendToToken: Map<String,String>? = null): String
     fun createClient(conf: Conf, appendToToken: Map<String,String>? = null): Client
