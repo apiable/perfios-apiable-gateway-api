@@ -15,6 +15,10 @@ package io.apiable.gateways.adapter.models.conf
  *
  */
 
-enum class GatewayConnectionType {
-    KONG_BASIC, AMAZON_BASIC, AZURE_BASIC, AMAZON_ROLE_ARN
-}
+class AzureBasicConf(
+    override var type: GatewayConnectionType = GatewayConnectionType.AZURE_BASIC,
+    val key: String,
+    val secret: String,
+    val subscriptionid: String,
+    val tenantid: String,
+) : Conf

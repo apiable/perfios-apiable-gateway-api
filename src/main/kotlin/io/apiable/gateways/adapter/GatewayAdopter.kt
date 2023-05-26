@@ -1,6 +1,7 @@
 package io.apiable.gateways.adapter
 
 import io.apiable.gateways.adapter.models.domain.Api
+import io.apiable.gateways.adapter.models.domain.Service
 import io.apiable.gateways.adapter.models.domain.Plan
 import io.apiable.gateways.adapter.models.conf.Conf
 import io.apiable.gateways.adapter.models.domain.Client
@@ -22,6 +23,7 @@ import io.apiable.gateways.adapter.models.domain.Subscription
  */
 
 interface GatewayAdopter {
+    fun listServices(conf: Conf): List<Service>
     /**
      * List apis of the Gateway
      *
@@ -30,7 +32,7 @@ interface GatewayAdopter {
      * @param url The admin url of the APIGateway to read the apis
      * @return
      */
-    fun listApis(conf: Conf): List<Api>
+    fun listApis(conf: Conf, serviceid: String): List<Api>
     fun updatePlan(conf: Conf, plan: Plan): Plan
     fun createPlan(conf: Conf, plan: Plan): Plan
     fun deletePlan(conf: Conf, plan: Plan)
