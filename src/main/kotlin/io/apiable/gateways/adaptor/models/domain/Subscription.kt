@@ -1,4 +1,4 @@
-package io.apiable.gateways.adapter.models.domain
+package io.apiable.gateways.adaptor.models.domain
 
 /**
  * Apiable Oy
@@ -13,16 +13,11 @@ package io.apiable.gateways.adapter.models.domain
  * Created on 26.04.23
  * @author: Apiable Geeks <geeks@apiable.io>
  *
- * Api
- *
- * @property name The name of the Api
- * @property url The url of the API
- * @property method The HTTP Method of the API
- * @property integrationId
- * @constructor Create empty Api
  */
-data class Api(
-    val name: String,
-    val url: String,
+
+
+
+data class Subscription(
+    val id: String,
     val integrationId: String? = null
 )

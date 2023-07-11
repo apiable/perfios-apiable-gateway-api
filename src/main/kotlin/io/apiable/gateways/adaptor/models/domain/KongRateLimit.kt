@@ -1,4 +1,4 @@
-package io.apiable.gateways.adapter.models.domain
+package io.apiable.gateways.adaptor.models.domain
 /**
  * Apiable Oy
  * http://www.apiable.io/
@@ -13,7 +13,7 @@ package io.apiable.gateways.adapter.models.domain
  * @author: Apiable Geeks <geeks@apiable.io>
  *
  */
-import io.apiable.gateways.adapter.models.conf.GatewayType
+import io.apiable.gateways.adaptor.models.conf.GatewayType
 
 class KongRateLimit(
     override var type: GatewayType = GatewayType.KONG,

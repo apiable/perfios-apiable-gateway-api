@@ -1,4 +1,4 @@
-package io.apiable.gateways.adapter.models.domain
+package io.apiable.gateways.adaptor.models.domain
 
 /**
  * Apiable Oy

@@ -1,4 +1,4 @@
-package io.apiable.gateways.adapter.models.conf
+package io.apiable.gateways.adaptor.models.conf
 
 /**
  * Apiable Oy
@@ -15,9 +15,6 @@ package io.apiable.gateways.adapter.models.conf
  *
  */
 
-class AmazonBasicConf(
-    override var type: GatewayConnectionType = GatewayConnectionType.AMAZON_BASIC,
-    val key: String,
-    val secret: String,
-    val region: String,
-) : Conf
+enum class GatewayType {
+    KONG, AMAZON
+}

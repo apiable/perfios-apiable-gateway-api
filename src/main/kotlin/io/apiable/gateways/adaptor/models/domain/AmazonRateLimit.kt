@@ -1,6 +1,6 @@
-package io.apiable.gateways.adapter.models.domain
+package io.apiable.gateways.adaptor.models.domain
 
-import io.apiable.gateways.adapter.models.conf.GatewayType
+import io.apiable.gateways.adaptor.models.conf.GatewayType
 
 /**
  * Apiable Oy

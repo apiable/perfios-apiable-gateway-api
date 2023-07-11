@@ -1,4 +1,4 @@
-package io.apiable.gateways.adapter.models.conf
+package io.apiable.gateways.adaptor.models.conf
 
 /**
  * Apiable Oy
