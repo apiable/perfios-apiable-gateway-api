@@ -24,7 +24,7 @@ interface GatewayAdapter {
      *
      * Callout to:
      *    AWS: java-client: listStages of listApis
-     *    Kong: GET ${conf.url}/services
+     *    Kong: GET ${conf.url}/services: {id, name, host, protocol, port, created, updated}
      *    Azure: https://management.azure.com/subscriptions/${conf.subscriptionid}/providers/Microsoft.ApiManagement/service?api-version=${conf.version}"
      * */
     fun listServices(conf: Conf): List<Service>
@@ -34,7 +34,8 @@ interface GatewayAdapter {
      *
      * Callout to:
      *    AWS: java-client: listStages of listApis
-     *    Kong: GET ${conf.url}/services
+     *    Kong: GET ${conf.url}/services:
+     *      response: {id, name, host, protocol, port, created, updated}
      *    Azure: GET https://management.azure.com/subscriptions/${conf.subscriptionid}/providers/Microsoft.ApiManagement/service?api-version=${conf.version}"
      * */
     fun listApis(conf: Conf, serviceid: String): List<Api>
@@ -45,8 +46,11 @@ interface GatewayAdapter {
      * Callout to:
      *    AWS: java-client: updateUsagePlan
      *    Kong:
-     *       GET ${conf.url}/services/${api.name}/plugins
-     *       PATCH {conf.url}/services/${api.name}/plugins/${aclPlugin.id}
+     *       GET ${conf.url}/services/${api.name}/plugins:
+     *          response: {id, name, config}
+     *       PATCH {conf.url}/services/${api.name}/plugins/${aclPlugin.id}:
+     *          request: {config: {allow: ["$planId"]}}
+     *          response: {id, config: {allow: ["$planId"]}}
      *    Azure:
      *       PUT https://management.azure.com${plan.integrationId}?api-version=${conf.version}
      *       DELETE https://management.azure.com${plan.integrationId}/apis/${api.name}?api-version=${conf.version}
@@ -60,7 +64,7 @@ interface GatewayAdapter {
      *
      * Callout to:
      *    AWS: java-client: createUsagePlan
-     *    Kong: POST ${conf.url}/services/${api.name}/plugins
+     *    Kong: POST ${conf.url}/services/${api.name}/plugins:  {config: {allow: ["$planId"]}}
      *    Azure:
      *       PUT https://management.azure.com${plan.integrationId}?api-version=${conf.version}
      *       DELETE https://management.azure.com${plan.integrationId}/apis/${api.name}?api-version=${conf.version}
@@ -85,6 +89,7 @@ interface GatewayAdapter {
      * Callout to:
      *    AWS: java-client: listApis
      *    Kong: GET ${conf.url}/services
+     *      response: {id, name, host, protocol, port, created, updated}
      *    Azure: GET https://management.azure.com/subscriptions/${conf.subscriptionid}/providers/Microsoft.ApiManagement/service?api-version=${conf.version}"
      * */
     fun ping(conf: Conf): Boolean
@@ -114,9 +119,18 @@ interface GatewayAdapter {
      * Callout to:
      *    AWS: java-client: createKeyForUsagePlan
      *    Kong:
-     *       POST ${conf.url}/consumers
-     *       POST ${conf.url}/consumers/$username/key-auth
-     *       POST ${conf.url}/consumers/$username/plugins
+     *       POST ${conf.url}/consumers:
+     *          request: {username}
+     *          response: {id, username, created, customId, tags}
+     *       POST ${conf.url}/consumers/$username/key-auth:
+     *          request: {key}
+     *          response: {id, key, tags, ttl, created, consumer: {id}}
+     *       POST ${conf.url}/consumers/$username/acls:
+     *          request: {group}
+     *          response: http.body ignored
+     *       POST ${conf.url}/consumers/$username/plugins:
+     *          request: {name, config: {second, minute, hour, day, month, year}}
+     *          response: http.body ignored
      *    Azure:
      *       PUT https://management.azure.com$url/subscriptions/${subscription.id}?api-version=${conf.version}&appType=portal
      *
@@ -150,9 +164,18 @@ interface GatewayAdapter {
      *    AWS: java-client: deleteKey
      *    Kong:
      *       DELETE ${conf.url}/consumers/$username
-     *       POST ${conf.url}/consumers
-     *       POST ${conf.url}/consumers/$username/key-auth
-     *       POST ${conf.url}/consumers/$username/plugins
+     *       POST ${conf.url}/consumers:
+     *          request: {username}
+     *          response: {id, username, created, customId, tags}
+     *       POST ${conf.url}/consumers/$username/key-auth:
+     *          request: {key}
+     *          response: {id, key, tags, ttl, created, consumer: {id}}
+     *       POST ${conf.url}/consumers/$username/acls:
+     *          request: {group}
+     *          response: http.body ignored
+     *       POST ${conf.url}/consumers/$username/plugins:
+     *          request: {name, config: {second, minute, hour, day, month, year}}
+     *          response: http.body ignored
      *    Azure:
      *       DELETE: https://management.azure.com${subscription.integrationId}?api-version=${conf.version}
      *       PUT https://management.azure.com$url/subscriptions/${subscription.id}?api-version=${conf.version}&appType=portal
@@ -180,7 +203,9 @@ interface GatewayAdapter {
      * Callout to:
      *    AWS: not supported: Can be combined with the Apiable Auth Platform - Curity
      *    Kong:
-     *       PATCH: client.registrationClientUri
+     *       PATCH: client.registrationClientUri, which is of a structure: ${conf.url}/consumers/$username/oauth2/${app.id}
+     *          request: {name, redirectUris}
+     *          response: {id, created, clientId, clientSecret, hashSecret, clientType, redirectUris, tags, name, consumer: {id}}
      *    Azure:
      *       not supported yet: Can be combined with the Apiable Auth Platform - Curity
      * */
