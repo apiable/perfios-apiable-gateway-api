@@ -1,4 +1,4 @@
-package io.apiable.gateways.adaptor.models.domain
+package io.apiable.gateways.adapter.models.domain
 /**
  * Apiable Oy
  * http://www.apiable.io/
@@ -14,7 +14,7 @@ package io.apiable.gateways.adaptor.models.domain
  *
  */
 import com.fasterxml.jackson.annotation.*
-import io.apiable.gateways.adaptor.models.conf.GatewayType
+import io.apiable.gateways.adapter.models.conf.GatewayType
 
 @JsonTypeInfo(use= JsonTypeInfo.Id.NAME, include= JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
 @JsonSubTypes(

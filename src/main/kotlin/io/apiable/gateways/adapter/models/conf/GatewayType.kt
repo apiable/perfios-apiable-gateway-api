@@ -1,4 +1,4 @@
-package io.apiable.gateways.adaptor.models.conf
+package io.apiable.gateways.adapter.models.conf
 
 /**
  * Apiable Oy
@@ -15,6 +15,6 @@ package io.apiable.gateways.adaptor.models.conf
  *
  */
 
-enum class GatewayConnectionType {
-    KONG_BASIC, AMAZON_BASIC, AZURE_BASIC, AMAZON_ROLE_ARN
+enum class GatewayType {
+    KONG, AMAZON
 }
