@@ -135,7 +135,7 @@ interface GatewayAdapter {
      *       PUT https://management.azure.com$url/subscriptions/${subscription.id}?api-version=${conf.version}&appType=portal
      *
      * */
-    fun createKey(conf: Conf, subscription: Subscription, clientIdOverride: String? = null, clientSecretOverride: String? = null, appendToToken: Map<String,String>? = null): String
+    fun createKey(conf: Conf, subscription: Subscription, key: String? = null, clientIdOverride: String? = null, clientSecretOverride: String? = null, appendToToken: Map<String,String>? = null): String
 
     /**
      * Read the key
